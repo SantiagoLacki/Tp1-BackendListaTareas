@@ -22,7 +22,7 @@ export default class Server {
 
   listen () {
     this.app.listen(this.port, () => {
-      console.info(`Servidor ejecutandose en: http://localhost:${this.port}`)
+      console.info(`Servidor ejecutandose en el link: http://localhost:${this.port}`)
     })
   }
 }
