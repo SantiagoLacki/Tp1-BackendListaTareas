@@ -17,6 +17,24 @@ export const leerTareas = async (req,res) => {
   }
 }
 
+export const leerTareaPorId = async (req,res) => {
+  try {
+    // Otener el parametro del request
+    console.log(req.params);
+    console.log(req.params.id);
+    // Pedir a mongoose que encuentre la tarea
+    const tareaBuscada = await Tarea.findById(req.params.id);
+    if (!tareaBuscada) {
+      return res.status(404).json({mensaje:'Tarea NO encontrada.'});
+    }
+    // Contestar al front
+    res.status(200).json(tareaBuscada);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({mensaje: 'No se pudo obtener la tarea.'});
+  }
+}
+
 export const crearTarea = async (req,res) => {
   try {
     // Recibir objeto
