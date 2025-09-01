@@ -51,4 +51,19 @@ export const crearTarea = async (req,res) => {
   }
 }
 
+export const borrarTareaPorId = async (req,res) => {
+  try {
+    // Buscar la tarea por id y borrarlo
+    const tareaEliminada = await Tarea.findByIdAndDelete(req.params.id);
+    if (!tareaEliminada) {
+      return res.status(404).json({mensaje:'Tarea NO encontrada.'});
+    }
+    // Contestar al front
+    res.status(200).json({mensaje: 'Tarea eliminada con exito.'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({mensaje: 'No se pudo eliminar la tarea.'});
+  }
+}
+
 // Agregar funcion para editar tarea
