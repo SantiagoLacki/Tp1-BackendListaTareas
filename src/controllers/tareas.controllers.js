@@ -66,4 +66,17 @@ export const borrarTareaPorId = async (req,res) => {
   }
 }
 
-// Agregar funcion para editar tarea
+export const editarTareaPorId = async (req,res) => {
+  try {
+    // Buscar la tarea por id y editarla
+    const tareaEditada = await Tarea.findByIdAndUpdate(req.params.id,req.body);
+    if (!tareaEditada) {
+      return res.status(404).json({mensaje:'Tarea NO encontrada.'});
+    }
+    // Contestar al front
+    res.status(200).json({mensaje: 'Tarea actualizada con exito.'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({mensaje: 'No se pudo editar la tarea.'});
+  }
+}
