@@ -5,10 +5,18 @@ export const test = (req, res) => {
   res.send('Primera prueba desde el backend!!')
 }
 
-export const leerTareas = (req,res) => {
-
+export const leerTareas = async (req,res) => {
+  try {
+    // Buscar todas las tareas en la bd
+    const listaTareas = await Tarea.find();
+    // Enviar resp al front
+    res.status(200).json(listaTareas)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({mensaje: 'Error al leer las tareas.'})
+  }
 }
-// Agregar funcion para crear tarea
+
 export const crearTarea = async (req,res) => {
   try {
     // Recibir objeto
